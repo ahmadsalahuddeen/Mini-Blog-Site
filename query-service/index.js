@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const axios  = require("axios");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -20,6 +20,8 @@ app.post("/events", (req, res) => {
     const { id, postId, content } = data;
     post[postId].comments.push({id, content}); // comments is an array of objects
   }
+  console.log(post)
+  res.send({})
 });
 app.get("/posts", (req, res) => {
   res.send(post);
