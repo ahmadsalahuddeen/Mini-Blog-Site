@@ -16,6 +16,8 @@ app.post('/events' ,(req, res)=>{
   console.log('Recieved Events: ' ,req.body.type )
   res.send({})
 })
+
+
 app.post("/posts/:id/comments", async (req, res) => {
   const commentId = randomBytes(4).toString("hex");
   const { content } = req.body;
