@@ -9,11 +9,30 @@ app.use(express.json());
 
 const commentsByPostId = {};
 
-app.get("/posts/:id/comments", (req, res) => {
+app.get("/posts/:id/comments", (req, res) => { 
   res.send(commentsByPostId[req.params.id] || []);
 });
-app.post('/events' ,(req, res)=>{
+app.post('/events' ,async(req, res)=>{
   console.log('Recieved Events: ' ,req.body.type )
+  const {type, data} = req.body
+  if(type=== 'CommentModerated'){
+    const {postId, id, status} = data
+const comments = commentsByPostId[data.postId]
+const  comment = comments.find(comment => { 
+  return comment.id === id})
+  comment.status = status
+
+  await axios.post('http://localhost:4009' {
+    type: "CommentUpdated",
+    data:{
+      id, 
+      postId,
+      content,
+      status,
+      
+    }
+  })
+}
   res.send({})
 })
 
