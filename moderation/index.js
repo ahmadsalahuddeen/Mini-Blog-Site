@@ -7,8 +7,25 @@ const cors = require('cors');
 app.use(cors())
 
 app.use(express.json())
-app.post('/events' , (req, res)=>{
-    
+app.post('/events' , async (req, res)=>{
+    const {type, data} = req.body
+
+    if(type=== 'CommentCreated'){
+
+        const status = data.content.incudes('orange') ? 'Approved' : 'rejected'
+await axios.post('/events', {
+    type: 'CommentModerated',
+    data: {
+        id: data.id,
+        content : data.content,
+        postId: data.postId,
+        status
+    }
+})
+         
+    }
+
+res.send({})
 })
 
 
