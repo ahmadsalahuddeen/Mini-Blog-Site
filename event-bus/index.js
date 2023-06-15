@@ -10,7 +10,7 @@ app.use(cors())
 app.post('/events', async(req, res)=>{
     const event = req.body
 
-   await axios.post('http://localhost:4001/events', event);
+    await axios.post('http://localhost:4001/events', event);
     await axios.post('http://localhost:4002/events', event);
     await axios.post('http://localhost:4003/events', event);
     await axios.post('http://localhost:4009/events', event);

@@ -23,7 +23,7 @@ app.post("/posts", async(req, res) => {
   const { title } = req.body;
 
   posts[id] = { 
-    id,
+    id, 
     title,
   };
   await axios.post('http://localhost:4005/events', {
