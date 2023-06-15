@@ -8,9 +8,7 @@ app.use(cors());
 
 const posts = {};
 
-app.post("/events", (req, res) => {
-  const { type, data } = req.body;
-
+const handleEvents = (type, data) => {
   if (type === "PostCreated") {
     const { id, title } = data;
     posts[id] = { id, title, comments: [] };
@@ -21,18 +19,33 @@ app.post("/events", (req, res) => {
     posts[postId].comments.push({ id, content, status }); // comments is an array of objects
   }
   if (type === "CommentUpdated") {
-    const { postId, status, id , content} = data;
+    const { postId, status, id, content } = data;
     const post = posts[postId];
     const comment = post.comments.find((comment) => {
       return comment.id === id;
     });
     (comment.status = status), (comment.content = content);
   }
-  console.log(posts);
+};
+
+app.post("/events", (req, res) => {
+  const { type, data } = req.body;
+
+  handleEvents(type, data);
   res.send({});
 });
 app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
-app.listen(4003, () => console.log("server started listening on 4003"));
+app.listen(4003, 
+ async () => {console.log("server started listening on 4003")
+
+const res = await axios.get('http://localhost:4005/events')
+
+for(let event of res.data){
+  console.log('proccessing events:', event.type)
+  handleEvents(event.type, event.data)
+}
+
+});
