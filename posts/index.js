@@ -35,4 +35,4 @@ app.post("/posts", async(req, res) => {
   res.send(posts[id])
 });
 
-app.listen(4002, () => console.log("server succefully on http://localhost:4002"));
+app.listen(4002, () => console.log("server succefully on http://localhost:4002 \nversion:30"));
