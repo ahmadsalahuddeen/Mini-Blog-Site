@@ -12,13 +12,13 @@ app.post('/events', async(req, res)=>{
     events.push(event)
     try {
         
-            await axios.post('http://localhost:4001/events', event);
-            await axios.post('http://localhost:4002/events', event);
-            await axios.post('http://localhost:4003/events', event);
-            await axios.post('http://localhost:4009/events', event);
+            await axios.post('http://comments-srv:4001/events', event);
+            await axios.post('http://posts-clusterip-srv:4002/events', event);
+            await axios.post('http://query-srv:4003/events', event);
+            await axios.post('http://moderation-srv:4009/events', event);
         
     } catch (error) {
-        console.log(error)
+        console.log('not not crashed')
     }
     res.send({status: 'OK'})
 })

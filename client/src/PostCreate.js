@@ -6,7 +6,7 @@ function PostCreate (){
     const [title, setTitle] = useState('')
     const handlePostSubmit = async (e)=>{
         e.preventDefault()
-       await axios.post('http://localhost:4002/posts', {
+       await axios.post('http://posts-clusterip-srv:4002/posts', {
             title
         })
         setTitle('')

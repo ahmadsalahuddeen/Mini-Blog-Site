@@ -26,7 +26,7 @@ app.post("/posts", async(req, res) => {
     id, 
     title,
   };
-  await axios.post('http://localhost:4005/events', {
+  await axios.post('http://event-bus-srv:4005/events', {
   type: 'PostCreated'  ,
   data: {
     id, title
@@ -35,4 +35,4 @@ app.post("/posts", async(req, res) => {
   res.send(posts[id])
 });
 
-app.listen(4002, () => console.log("server succefully on http://localhost:4002 \nV69"));
+app.listen(4002, () => console.log("server succefully on http://posts-clusterip-srv:4002 \nV69"));
