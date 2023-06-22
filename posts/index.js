@@ -18,7 +18,7 @@ app.post('/events' ,(req, res)=>{
   console.log('Recieved Events: ' ,req.body.type )
   res.send({})
 })
-app.post("/posts", async(req, res) => {
+app.post("/posts/create", async(req, res) => {
   let id = randomBytes(4).toString("hex");
   const { title } = req.body;
 
